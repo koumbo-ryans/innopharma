@@ -7,10 +7,7 @@ const pool = mysql.createPool({
     database: process.env.DB_NAME || 'innopharma_db',
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0,
-    acquireTimeout: 60000,
-    timeout: 60000,
-    reconnect: true
+    queueLimit: 0
 });
 
 pool.getConnection((err, connection) => {

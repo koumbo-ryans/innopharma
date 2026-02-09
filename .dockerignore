@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+dist
+.git
+.gitignore
+tests
+.vscode
+env
+.env
+react-app/node_modules
+react-app/dist

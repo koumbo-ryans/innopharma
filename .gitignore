@@ -11,6 +11,9 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# Ensure the example env is kept but local .env remains ignored
+# (keep .env.example in the repo as guidance)
+
 # Logs
 logs
 *.log

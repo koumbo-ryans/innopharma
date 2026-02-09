@@ -62,17 +62,6 @@ In the next weeks,we will have to
 ##  Project Overview
 A collaborative project to practice Git, GitHub, HTML, and CSS while building the Innovapharma landing page.
 
-##  Team Tasks
-
-| Task | Description | Assigned To |
-|------|-------------|-------------|
-| 1 | Recall of Git & GitHub uses | Samuel |
-| 2 | Install & configure Git | Samuel |
-| 3 | Git commands & definitions | Anob |
-| 4 | Git command implementation | Lorna |
-| 5 | Collaboration using branches & PRs | Etienne |
-| 6 | Build landing page (HTML/CSS) | Ryan |
-
 ##  Project Structure
 
 | File/Folder | Purpose |
@@ -118,3 +107,43 @@ cd server
 npm test
 
 (This command runs all unit tests defined in the server code.)
+
+## Docker Deployment
+
+Follow these steps to build and run the app with Docker Compose (backend + MySQL + frontend):
+
+- Create a `.env` file from `.env.example` and set secure passwords and DB credentials.
+- From the repository root, build and start the stack:
+
+```bash
+docker compose build
+docker compose up -d
+```
+
+- Check status and logs:
+
+```bash
+docker compose ps
+docker compose logs -f backend
+docker compose logs -f db
+docker compose logs -f frontend
+```
+
+- Sanity checks:
+
+```bash
+curl http://localhost:5000/api/test-db
+# open the frontend in your browser at http://localhost:5173
+```
+
+- Stop and remove the stack (including named volumes):
+
+```bash
+docker compose down -v
+```
+
+Troubleshooting tips
+- "Can't connect to database": confirm `.env` values match compose file and `DB_HOST` is set to `db`; run `docker compose logs db` to view MySQL errors.
+- "Backend shows dependency or npm errors": try rebuilding without cache: `docker compose build --no-cache backend`.
+- "Frontend shows blank page": inspect `frontend` build logs and container logs: `docker compose logs frontend`; verify the React build succeeded and files are served by nginx.
+
